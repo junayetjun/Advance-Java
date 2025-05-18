@@ -12,7 +12,7 @@ public class DbUtill {
     
     Connection con = null;
     
-    private final String url="jdbc:mysql://localhost:3306/mysql";
+    private final String url="jdbc:mysql://localhost:3306/students";
     private final String user="root";
     private final String password="1234";
     private final String driver="com.mysql.cj.jdbc.Driver";
