@@ -81,7 +81,7 @@ public class CustomersDao {
             ps = db.getCon().prepareCall(sql);
             ps.setInt(1, id);
             
-            ps.executeQuery();
+            ps.executeUpdate();
             ps.close();
             db.getCon().close();
             
@@ -93,6 +93,31 @@ public class CustomersDao {
         }
       
       }
+      
+      public void editCustomer(int id ,String name, String email, String cell, String address, JTable jt) {
+
+        String sql = "update customer set name=?, cell=?, email=?, address=? where id=?";
+        try {
+            ps = db.getCon().prepareCall(sql);
+            ps.setString(1, name);
+            ps.setString(2, cell);
+            ps.setString(3, email);
+            ps.setString(4, address);
+            ps.setInt(5, id);
+
+            ps.executeUpdate();
+
+            ps.close();
+            db.getCon().close();
+
+            JOptionPane.showMessageDialog(null, "customer Updated Succcessfully");
+            showAllCustomer(jt);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "customer Updated not Succcessfully");
+            Logger.getLogger(CustomersDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    } 
     
 }
 

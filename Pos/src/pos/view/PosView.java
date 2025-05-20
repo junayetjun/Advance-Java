@@ -28,6 +28,8 @@ public class PosView extends javax.swing.JFrame {
     txtCustomerEmail.setText("");
     txtCustomerAddress.setText("");
     
+    btnCustomerSave.setVisible(true);
+    
     }
 
     
@@ -284,6 +286,7 @@ public class PosView extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("ID");
 
+        txtCustomerId.setBackground(new java.awt.Color(204, 204, 204));
         txtCustomerId.setEnabled(false);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -298,9 +301,17 @@ public class PosView extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Email");
 
+        txtCustomerEmail.setBackground(new java.awt.Color(204, 204, 204));
+
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Address");
+
+        txtCustomerAddress.setBackground(new java.awt.Color(204, 204, 204));
+
+        txtCustomerName.setBackground(new java.awt.Color(204, 204, 204));
+
+        txtCustomerCell.setBackground(new java.awt.Color(204, 204, 204));
 
         btnCustomerSave.setBackground(new java.awt.Color(23, 152, 23));
         btnCustomerSave.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -315,6 +326,11 @@ public class PosView extends javax.swing.JFrame {
         btnCustomerEdit.setBackground(new java.awt.Color(255, 255, 79));
         btnCustomerEdit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCustomerEdit.setText("EDIT");
+        btnCustomerEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCustomerEditMouseClicked(evt);
+            }
+        });
 
         btnCustomerDelete.setBackground(new java.awt.Color(239, 5, 5));
         btnCustomerDelete.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -369,13 +385,13 @@ public class PosView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCustomerAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
+                        .addGap(70, 70, 70)
                         .addComponent(btnCustomerSave)
-                        .addGap(81, 81, 81)
+                        .addGap(97, 97, 97)
                         .addComponent(btnCustomerEdit)
-                        .addGap(77, 77, 77)
+                        .addGap(99, 99, 99)
                         .addComponent(btnCustomerDelete)
-                        .addGap(80, 80, 80)
+                        .addGap(118, 118, 118)
                         .addComponent(btnCustomerReset)))
                 .addContainerGap(102, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
@@ -409,10 +425,9 @@ public class PosView extends javax.swing.JFrame {
                     .addComponent(txtCustomerCell, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtCustomerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+                    .addComponent(txtCustomerEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCustomerAddress))
                 .addGap(47, 47, 47)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -503,7 +518,7 @@ public class PosView extends javax.swing.JFrame {
 
     private void tblCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCustomerMouseClicked
         // TODO add your handling code here:
-
+        btnCustomerSave.setVisible(false);
         int rowIndex = tblCustomer.getSelectedRow();
 
         String id = tblCustomer.getModel().getValueAt(rowIndex, 0).toString();
@@ -521,10 +536,26 @@ public class PosView extends javax.swing.JFrame {
 
     private void btnCustomerDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomerDeleteMouseClicked
         // TODO add your handling code here:
-        int id = Integer.parseInt(txtCustomerId.getText());
+        int id =Integer.parseInt(txtCustomerId.getText());
         
         cu.deleteCustomer(id, tblCustomer);
+        resetCustomerData();
+        btnCustomerSave.setVisible(true);
     }//GEN-LAST:event_btnCustomerDeleteMouseClicked
+
+    private void btnCustomerEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomerEditMouseClicked
+        // TODO add your handling code here:
+        
+        String name = txtCustomerName.getText().trim();
+        String email = txtCustomerEmail.getText().trim();
+        String cell = txtCustomerCell.getText().trim();
+        String address = txtCustomerAddress.getText().trim();
+        int id = Integer.parseInt(txtCustomerId.getText().trim());
+
+        cu.editCustomer(id, name, email, cell, address, tblCustomer);
+        resetCustomerData();
+         btnCustomerSave.setVisible(true);
+    }//GEN-LAST:event_btnCustomerEditMouseClicked
 
     /**
      * @param args the command line arguments
