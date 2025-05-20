@@ -5,6 +5,7 @@
 package pos.view;
 
 import dao.CustomersDao;
+
 import pos.utill.DbUtill;
 
 /**
@@ -18,7 +19,7 @@ public class PosView extends javax.swing.JFrame {
      */
     public PosView() {
         initComponents();
-        cu.showAllCustomer(tblCustomer);
+       // cu.showAllCustomer(tblCustomer);
         
     }
     public void resetCustomerData(){
@@ -64,6 +65,8 @@ public class PosView extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        btnCustomerRefresh = new javax.swing.JButton();
+        btnCustomerViewAllData = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtCustomerId = new javax.swing.JTextField();
@@ -81,6 +84,7 @@ public class PosView extends javax.swing.JFrame {
         btnCustomerReset = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCustomer = new javax.swing.JTable();
+        btnCustomerSearch = new javax.swing.JButton();
         tabSupplier = new javax.swing.JTabbedPane();
         tabCategory = new javax.swing.JTabbedPane();
         tabPurchase = new javax.swing.JTabbedPane();
@@ -267,15 +271,53 @@ public class PosView extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Customers");
 
+        btnCustomerRefresh.setBackground(new java.awt.Color(55, 183, 110));
+        btnCustomerRefresh.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCustomerRefresh.setForeground(new java.awt.Color(255, 255, 255));
+        btnCustomerRefresh.setText("Refresh");
+        btnCustomerRefresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCustomerRefreshMouseClicked(evt);
+            }
+        });
+
+        btnCustomerViewAllData.setBackground(new java.awt.Color(55, 183, 110));
+        btnCustomerViewAllData.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCustomerViewAllData.setForeground(new java.awt.Color(255, 255, 255));
+        btnCustomerViewAllData.setText("View All Details");
+        btnCustomerViewAllData.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCustomerViewAllDataMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(btnCustomerRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCustomerViewAllData, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(btnCustomerRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(btnCustomerViewAllData, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, -1));
@@ -287,7 +329,6 @@ public class PosView extends javax.swing.JFrame {
         jLabel4.setText("ID");
 
         txtCustomerId.setBackground(new java.awt.Color(204, 204, 204));
-        txtCustomerId.setEnabled(false);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -369,10 +410,34 @@ public class PosView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblCustomer);
 
+        btnCustomerSearch.setBackground(new java.awt.Color(0, 0, 0));
+        btnCustomerSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCustomerSearch.setForeground(new java.awt.Color(255, 255, 255));
+        btnCustomerSearch.setText("Search");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCustomerSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCustomerName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCustomerCell, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -394,23 +459,6 @@ public class PosView extends javax.swing.JFrame {
                         .addGap(118, 118, 118)
                         .addComponent(btnCustomerReset)))
                 .addContainerGap(102, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCustomerName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCustomerCell, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -422,7 +470,8 @@ public class PosView extends javax.swing.JFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCustomerCell, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCustomerCell, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCustomerSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCustomerEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -541,6 +590,7 @@ public class PosView extends javax.swing.JFrame {
         cu.deleteCustomer(id, tblCustomer);
         resetCustomerData();
         btnCustomerSave.setVisible(true);
+        tblCustomer.setVisible(true);
     }//GEN-LAST:event_btnCustomerDeleteMouseClicked
 
     private void btnCustomerEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomerEditMouseClicked
@@ -555,7 +605,22 @@ public class PosView extends javax.swing.JFrame {
         cu.editCustomer(id, name, email, cell, address, tblCustomer);
         resetCustomerData();
          btnCustomerSave.setVisible(true);
+         tblCustomer.setVisible(true);
     }//GEN-LAST:event_btnCustomerEditMouseClicked
+
+    private void btnCustomerRefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomerRefreshMouseClicked
+        // TODO add your handling code here:
+        resetCustomerData();        
+       tblCustomer.setVisible(false);
+        
+        //cu.showAllCustomer(tblCustomer);
+    }//GEN-LAST:event_btnCustomerRefreshMouseClicked
+
+    private void btnCustomerViewAllDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomerViewAllDataMouseClicked
+        // TODO add your handling code here:
+        tblCustomer.setVisible(true);
+        cu.showAllCustomer(tblCustomer);
+    }//GEN-LAST:event_btnCustomerViewAllDataMouseClicked
 
     /**
      * @param args the command line arguments
@@ -598,8 +663,11 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JButton btnCustomer;
     private javax.swing.JButton btnCustomerDelete;
     private javax.swing.JButton btnCustomerEdit;
+    private javax.swing.JButton btnCustomerRefresh;
     private javax.swing.JButton btnCustomerReset;
     private javax.swing.JButton btnCustomerSave;
+    private javax.swing.JButton btnCustomerSearch;
+    private javax.swing.JButton btnCustomerViewAllData;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnPurchase;
     private javax.swing.JButton btnReport;
