@@ -1,3 +1,4 @@
+
 package dao;
 
 import java.sql.PreparedStatement;
@@ -10,43 +11,46 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import pos.utill.DbUtill;
 
-public class CustomersDao {
 
-    DbUtill db = new DbUtill();
+public class SupplierDao {
+    
+     DbUtill db = new DbUtill();
 
     PreparedStatement ps;
 
-    public void saveCustomer(String name, String email, String cell, String address, JTable jt) {
+    public void saveSupplier(String name, String email, String cell, String address,String contactPerson, String contactPPost, JTable jt) {
 
-        String sql = "insert into customer(name, cell, email, address) values (?,?,?,?)";
+        String sql = "insert into suppliers(name, cell, email, address, contactPerson, contactPPost) values (?,?,?,?,?,?)";
         try {
             ps = db.getCon().prepareCall(sql);
             ps.setString(1, name);
             ps.setString(2, cell);
             ps.setString(3, email);
             ps.setString(4, address);
+            ps.setString(5, contactPerson);
+            ps.setString(6, contactPPost);
 
             ps.executeUpdate();
 
             ps.close();
             db.getCon().close();
 
-            JOptionPane.showMessageDialog(null, "customer Saved Succcessfully");
-            showAllCustomer(jt);
+            JOptionPane.showMessageDialog(null, "Supplier Saved Succcessfully");
+           showAllSupplier(jt);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "customer Saved not Succcessfully");
+            JOptionPane.showMessageDialog(null, "Supplier Saved not Succcessfully");
             Logger.getLogger(CustomersDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
+    
+    public void showAllSupplier(JTable jt) {
 
-    public void showAllCustomer(JTable jt) {
-
-        String[] columnsName = {"ID", "Name", "Email", "Cell", "Address"};
+        String[] columnsName = {"ID", "Name", "Email", "Cell", "Address", "ContactPerson","ContactPPost "};
         DefaultTableModel tableModel = new DefaultTableModel(columnsName, 0);
         jt.setModel(tableModel);
 
-        String sql = "select * from customer";
+        String sql = "select * from suppliers ";
 
         PreparedStatement ps;
         try {
@@ -58,8 +62,10 @@ public class CustomersDao {
                 String email = rs.getString("email");
                 String cell = rs.getString("cell");
                 String address = rs.getString("address");
+                String contactPerson = rs.getString("contactPerson");
+                String contactPPost = rs.getString("contactPPost");
 
-                Object[] rowData = {id, name, email, cell, address};
+                Object[] rowData = {id, name, email, cell, address, contactPerson,contactPPost};
                 tableModel.addRow(rowData);
             }
             rs.close();
@@ -68,15 +74,13 @@ public class CustomersDao {
         } catch (SQLException ex) {
             Logger.getLogger(CustomersDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
       
-
-    }
-
-      public void deleteCustomer(int id, JTable jt){
+}
+    
+     public void deleteSupplier(int id, JTable jt){
           
       
-      String sql = "delete from customer where id=?";
+      String sql = "delete from suppliers where id=?";
         try {
             ps = db.getCon().prepareCall(sql);
             ps.setInt(1, id);
@@ -85,40 +89,44 @@ public class CustomersDao {
             ps.close();
             db.getCon().close();
             
-            JOptionPane.showMessageDialog(null, "Customer delete successfully");
-            showAllCustomer(jt);
+            JOptionPane.showMessageDialog(null, "Supplier delete successfully");
+            showAllSupplier(jt);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Customer not delete successfully");
-            Logger.getLogger(CustomersDao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Supplier not delete successfully");
+            Logger.getLogger(SupplierDao.class.getName()).log(Level.SEVERE, null, ex);
         }
       
       }
-      
-      public void editCustomer(int id ,String name, String email, String cell, String address, JTable jt) {
+    
+    
+     
+      public void editSupplier(int id ,String name, String email, String cell, String address, String contactPerson, String contactPPost ,JTable jt) {
 
-        String sql = "update customer set name=?, cell=?, email=?, address=? where id=?";
+        String sql = "update customer set name=?, cell=?, email=?, address=?, contactPerson=?, contactPPost=? where id=?";
         try {
             ps = db.getCon().prepareCall(sql);
             ps.setString(1, name);
             ps.setString(2, cell);
             ps.setString(3, email);
             ps.setString(4, address);
-            ps.setInt(5, id);
+            ps.setString(5, contactPerson);
+            ps.setString(6, contactPPost);
+            ps.setInt(7, id);
 
             ps.executeUpdate();
 
             ps.close();
             db.getCon().close();
 
-            JOptionPane.showMessageDialog(null, "customer Updated Succcessfully");
-            showAllCustomer(jt);
+            JOptionPane.showMessageDialog(null, "Supplier Updated Succcessfully");
+            showAllSupplier(jt);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "customer Updated not Succcessfully");
-            Logger.getLogger(CustomersDao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Supplier Updated not Succcessfully");
+            Logger.getLogger(SupplierDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     } 
+      
+      
     
 }
-
-
