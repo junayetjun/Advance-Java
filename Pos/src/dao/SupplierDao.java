@@ -102,7 +102,7 @@ public class SupplierDao {
      
       public void editSupplier(int id ,String name, String email, String cell, String address, String contactPerson, String contactPPost ,JTable jt) {
 
-        String sql = "update customer set name=?, cell=?, email=?, address=?, contactPerson=?, contactPPost=? where id=?";
+        String sql = "update suppliers set name=?, cell=?, email=?, address=?, contactPerson=?, contactPPost=? where id=?";
         try {
             ps = db.getCon().prepareCall(sql);
             ps.setString(1, name);

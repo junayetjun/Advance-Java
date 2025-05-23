@@ -715,6 +715,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Search"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCustomerSearchMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -823,7 +826,7 @@
                                                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                                                       <Component id="jLabel12" min="-2" pref="82" max="-2" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="txtSupplierIdAddress" min="-2" pref="297" max="-2" attributes="0"/>
+                                                      <Component id="txtSupplierAddress" min="-2" pref="297" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
@@ -865,7 +868,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="txtSupplierIdAddress" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtSupplierAddress" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabel12" alignment="1" min="-2" pref="28" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -942,7 +945,7 @@
                         <Property name="text" type="java.lang.String" value="Address"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtSupplierIdAddress">
+                    <Component class="javax.swing.JTextField" name="txtSupplierAddress">
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel13">
                       <Properties>

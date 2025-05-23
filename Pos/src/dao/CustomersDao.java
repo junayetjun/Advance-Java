@@ -118,6 +118,42 @@ public class CustomersDao {
         }
 
     } 
+      
+      
+      public Object[] findCustomerId(int id){
+      
+      
+          String sql ="select * from customer where id=?";
+          
+        try {
+            ps = db.getCon().prepareCall(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                return new Object[]{
+                
+                    rs.getString("name"),
+                    rs.getString("email"),
+                    rs.getString("cell"),
+                    rs.getString("address")
+                   
+                };
+            
+            }
+            rs.close();
+            ps.close();
+            db.getCon().close();
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomersDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+       return null;
+      }
+      
+      
     
 }
 
