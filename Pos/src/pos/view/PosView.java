@@ -1037,6 +1037,7 @@ public class PosView extends javax.swing.JFrame {
     private void btnPurchaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPurchaseMouseClicked
         // TODO add your handling code here:
         tabMain.setSelectedIndex(4);
+        purchaseDao.loadCategory(comboPurchaseCategory);
     }//GEN-LAST:event_btnPurchaseMouseClicked
 
     private void btnSalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalesMouseClicked
