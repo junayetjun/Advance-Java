@@ -2,6 +2,7 @@
 package dao;
 
 import entity.Category;
+import entity.Stock;
 import java.sql.PreparedStatement;
 import java.util.List;
 import javax.swing.JComboBox;
@@ -15,6 +16,28 @@ public class PurchaseDao {
     String sql;
     
     CategoryDao categoryDao = new CategoryDao();
+    StockDao stockDao = new StockDao();
+    
+    
+    public void loadProduct(JComboBox<String> comboProductList, String category){
+            comboProductList.removeAllItems();
+            
+            List<Stock> stockList = stockDao.getProductByCategory(category);
+    
+            if(stockList.isEmpty()){
+                System.out.println("No Product found!");
+                return;
+            }
+            
+            for(Stock s: stockList){
+                
+                comboProductList.addItem(s.getProductName());
+               
+            }
+            
+    }
+    
+    
     
     public void loadCategory(JComboBox<String> comboCategoryList){
 

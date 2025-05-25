@@ -8,6 +8,8 @@ import dao.CategoryDao;
 import dao.CustomersDao;
 import dao.PurchaseDao;
 import dao.SupplierDao;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import javax.swing.JOptionPane;
 
 import pos.utill.DbUtill;
@@ -28,7 +30,31 @@ public class PosView extends javax.swing.JFrame {
          categoryDao.showAllCategory(tblCategory);
          purchaseDao.loadCategory(comboPurchaseCategory);
 
+         
+         comboPurchaseCategory.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+               String categoryName = comboPurchaseCategory.getSelectedItem().toString();
+            
+               purchaseDao.loadProduct(comboPurchaseProductName, categoryName);
+            
+               
+               
+               
+            }
+         });
+         
+         
+//         comboPurchaseProductName.addItemListener(new ItemListener() {
+//            @Override
+//            public void itemStateChanged(ItemEvent e) {
+//                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//            }
+//         });
     }
+    
+    
+    
 
     public void resetCustomerData() {
         txtCustomerId.setText("");
@@ -147,7 +173,7 @@ public class PosView extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         comboPurchaseCategory = new javax.swing.JComboBox<>();
         jLabel21 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        comboPurchaseProductName = new javax.swing.JComboBox<>();
         jLabel22 = new javax.swing.JLabel();
         jComboBox3 = new javax.swing.JComboBox<>();
         jLabel23 = new javax.swing.JLabel();
@@ -873,6 +899,12 @@ public class PosView extends javax.swing.JFrame {
 
         tabMain.addTab("tab4", tabCategory);
 
+        tabPurchase.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabPurchaseMouseClicked(evt);
+            }
+        });
+
         jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -903,7 +935,7 @@ public class PosView extends javax.swing.JFrame {
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setText("Product Name");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboPurchaseProductName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
@@ -942,7 +974,6 @@ public class PosView extends javax.swing.JFrame {
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(comboPurchaseCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -958,7 +989,7 @@ public class PosView extends javax.swing.JFrame {
                             .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox2, 0, 142, Short.MAX_VALUE)
+                            .addComponent(comboPurchaseProductName, 0, 142, Short.MAX_VALUE)
                             .addComponent(jTextField2))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -981,7 +1012,7 @@ public class PosView extends javax.swing.JFrame {
                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboPurchaseCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboPurchaseProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -1033,12 +1064,6 @@ public class PosView extends javax.swing.JFrame {
         // TODO add your handling code here:
         tabMain.setSelectedIndex(3);
     }//GEN-LAST:event_btnCategoryMouseClicked
-
-    private void btnPurchaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPurchaseMouseClicked
-        // TODO add your handling code here:
-        tabMain.setSelectedIndex(4);
-        purchaseDao.loadCategory(comboPurchaseCategory);
-    }//GEN-LAST:event_btnPurchaseMouseClicked
 
     private void btnSalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalesMouseClicked
         // TODO add your handling code here:
@@ -1295,6 +1320,17 @@ public class PosView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnCategoryEditMouseClicked
 
+    private void tabPurchaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabPurchaseMouseClicked
+        // TODO add your handling code here:
+        //tabMain.setSelectedIndex(4);
+        //purchaseDao.loadCategory(comboPurchaseCategory);
+    }//GEN-LAST:event_tabPurchaseMouseClicked
+
+    private void btnPurchaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPurchaseMouseClicked
+        // TODO add your handling code here:
+        tabMain.setSelectedIndex(4);
+    }//GEN-LAST:event_btnPurchaseMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1358,9 +1394,9 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JButton btnSupplierReset;
     private javax.swing.JButton btnSupplierSave;
     private javax.swing.JComboBox<String> comboPurchaseCategory;
+    private javax.swing.JComboBox<String> comboPurchaseProductName;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
