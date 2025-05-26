@@ -26,10 +26,10 @@ public class PosView extends javax.swing.JFrame {
     public PosView() {
         initComponents();
         // cu.showAllCustomer(tblCustomer);
-        supplierDao.showAllSupplier(tblSupplier);
+         supplierDao.showAllSupplier(tblSupplier);
          categoryDao.showAllCategory(tblCategory);
          purchaseDao.loadCategory(comboPurchaseCategory);
-
+         supplierDao.showAllSupplierToPurchaseComboBox(comboPurchaseSupplierName);
          
          comboPurchaseCategory.addItemListener(new ItemListener() {
             @Override
@@ -173,13 +173,13 @@ public class PosView extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         comboPurchaseProductName = new javax.swing.JComboBox<>();
         jLabel22 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        comboPurchaseSupplierName = new javax.swing.JComboBox<>();
         jLabel23 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtPurchaseUnitPrice = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtPurchaseQuantity = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtPurchaseTotalPrice = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         tabSales = new javax.swing.JTabbedPane();
@@ -940,7 +940,7 @@ public class PosView extends javax.swing.JFrame {
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setText("Customer Name");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboPurchaseSupplierName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
@@ -952,6 +952,12 @@ public class PosView extends javax.swing.JFrame {
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel24.setText("Quantity");
 
+        txtPurchaseQuantity.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPurchaseQuantityFocusLost(evt);
+            }
+        });
+
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -959,6 +965,11 @@ public class PosView extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("Confirm");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton2.setText("Reset");
@@ -975,7 +986,7 @@ public class PosView extends javax.swing.JFrame {
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(comboPurchaseCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtPurchaseUnitPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jButton1)))
@@ -988,7 +999,7 @@ public class PosView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(comboPurchaseProductName, 0, 142, Short.MAX_VALUE)
-                            .addComponent(jTextField2))
+                            .addComponent(txtPurchaseQuantity))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -997,8 +1008,8 @@ public class PosView extends javax.swing.JFrame {
                                 .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox3, 0, 189, Short.MAX_VALUE)
-                            .addComponent(jTextField3)))
+                            .addComponent(comboPurchaseSupplierName, 0, 189, Short.MAX_VALUE)
+                            .addComponent(txtPurchaseTotalPrice)))
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(69, Short.MAX_VALUE))
         );
@@ -1012,15 +1023,15 @@ public class PosView extends javax.swing.JFrame {
                     .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboPurchaseProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboPurchaseSupplierName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPurchaseUnitPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPurchaseQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPurchaseTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1330,6 +1341,30 @@ public class PosView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnPurchaseMouseClicked
 
+    private void txtPurchaseQuantityFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPurchaseQuantityFocusLost
+        // TODO add your handling code here:
+        float unitPrice = Float.parseFloat(txtPurchaseUnitPrice.getText().trim());
+        float quantity = Float.parseFloat(txtPurchaseQuantity.getText().trim());
+        
+        float totalPrice = unitPrice * quantity;
+        
+        txtPurchaseTotalPrice.setText(String.valueOf(totalPrice));
+    }//GEN-LAST:event_txtPurchaseQuantityFocusLost
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        String category = comboPurchaseCategory.getSelectedItem().toString();
+        String productName = comboPurchaseProductName.getSelectedItem().toString();
+        String supplierName = comboPurchaseSupplierName.getSelectedItem().toString();
+        float unitPrice = Float.parseFloat(txtPurchaseUnitPrice.getText().trim());
+        float quantity = Float.parseFloat(txtPurchaseQuantity.getText().trim());
+        float totalPrice = Float.parseFloat(txtPurchaseTotalPrice.getText().trim());
+        
+        purchaseDao.savePurchase(productName, unitPrice, quantity, totalPrice, category, supplierName);
+        
+        
+    }//GEN-LAST:event_jButton1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1394,9 +1429,9 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JButton btnSupplierSave;
     private javax.swing.JComboBox<String> comboPurchaseCategory;
     private javax.swing.JComboBox<String> comboPurchaseProductName;
+    private javax.swing.JComboBox<String> comboPurchaseSupplierName;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1442,9 +1477,6 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTabbedPane tabCategory;
     private javax.swing.JTabbedPane tabCustomer;
     private javax.swing.JTabbedPane tabHome;
@@ -1464,6 +1496,9 @@ public class PosView extends javax.swing.JFrame {
     private javax.swing.JTextField txtCustomerEmail;
     private javax.swing.JTextField txtCustomerId;
     private javax.swing.JTextField txtCustomerName;
+    private javax.swing.JTextField txtPurchaseQuantity;
+    private javax.swing.JTextField txtPurchaseTotalPrice;
+    private javax.swing.JTextField txtPurchaseUnitPrice;
     private javax.swing.JTextField txtSupplierAddress;
     private javax.swing.JTextField txtSupplierCell;
     private javax.swing.JTextField txtSupplierContactPerson;
