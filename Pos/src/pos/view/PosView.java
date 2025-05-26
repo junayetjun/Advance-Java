@@ -39,8 +39,6 @@ public class PosView extends javax.swing.JFrame {
                purchaseDao.loadProduct(comboPurchaseProductName, categoryName);
             
                
-               
-               
             }
          });
          
@@ -1323,12 +1321,13 @@ public class PosView extends javax.swing.JFrame {
     private void tabPurchaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabPurchaseMouseClicked
         // TODO add your handling code here:
         //tabMain.setSelectedIndex(4);
-        //purchaseDao.loadCategory(comboPurchaseCategory);
+       // purchaseDao.loadCategory(comboPurchaseCategory);
     }//GEN-LAST:event_tabPurchaseMouseClicked
 
     private void btnPurchaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPurchaseMouseClicked
         // TODO add your handling code here:
         tabMain.setSelectedIndex(4);
+        
     }//GEN-LAST:event_btnPurchaseMouseClicked
 
     /**
