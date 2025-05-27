@@ -63,7 +63,7 @@ public class PurchaseDao {
     public void savePurchase(String name, float unitPrice, float quantity,
             float totalPrice, String category, String supplier){
         
-        sql = "insert into purchase(name, unitPrice, quantity, totalPrice, category, supplier)"
+        sql = "insert into purchase(name, unitPrice, quantity, totalPrice, category, supplier, date)"
                 + "values(?,?,?,?,?,?,now())";
         
         try {
