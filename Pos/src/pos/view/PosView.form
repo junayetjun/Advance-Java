@@ -1447,7 +1447,7 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnPurchaseConfirm" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -1505,7 +1505,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jButton1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Component id="btnPurchaseConfirm" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                                   <Component id="jButton2" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="27" max="32767" attributes="0"/>
@@ -1640,7 +1640,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtPurchaseTotalPrice">
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton1">
+                    <Component class="javax.swing.JButton" name="btnPurchaseConfirm">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="12" style="1"/>
@@ -1648,7 +1648,7 @@
                         <Property name="text" type="java.lang.String" value="Confirm"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnPurchaseConfirmMouseClicked"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton2">
@@ -1909,6 +1909,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Reset"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnProductResetMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
