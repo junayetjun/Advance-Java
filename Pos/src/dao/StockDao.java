@@ -18,6 +18,36 @@ public class StockDao {
     PreparedStatement ps;
     String sql;
     ResultSet rs;
+    
+    
+     public List<Stock> getProductByCategory(String category) {
+        List<Stock> stockList = new ArrayList<>();
+
+        sql = "select * from stock where category=?";
+
+        try {
+            ps = db.getCon().prepareCall(sql);
+            ps.setString(1, category);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Stock s = new Stock(rs.getInt("id"),
+                        rs.getString("productName"),
+                        rs.getFloat("quantity"),
+                        rs.getString("category")
+                );
+
+                stockList.add(s);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(StockDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return stockList;
+
+    }
+    
+    
 
     public void saveStock(String productName, float quantity, String category) {
 
@@ -90,31 +120,54 @@ public class StockDao {
 
     }
 
-    public List<Stock> getProductByCategory(String category) {
-        List<Stock> stockList = new ArrayList<>();
+     public float getStockQuantityByProductName(String productName){
+    
+        sql= "select quantity from stock where productName = ?";
+    
+        float quantity=0;
+        
+        try {
+            ps=db.getCon().prepareStatement(sql);
+            ps.setString(1, productName);
+            
+            rs=ps.executeQuery();
+            
+            while(rs.next()){
+            
+                quantity = rs.getFloat("quantity");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(StockDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return quantity;
+    }
+    
+    
+    
+    public void updateStockQuantityByProductNameSales(String productName, float quantity) {
 
-        sql = "select * from stock where category=?";
+        sql = "update stock set quantity = quantity - ? where productName = ?";
 
         try {
-            ps = db.getCon().prepareCall(sql);
-            ps.setString(1, category);
-            rs = ps.executeQuery();
+            ps = db.getCon().prepareStatement(sql);
 
-            while (rs.next()) {
-                Stock s = new Stock(rs.getInt("id"),
-                        rs.getString("productName"),
-                        rs.getFloat("quantity"),
-                        rs.getString("category")
-                );
+            ps.setFloat(1, quantity);
+            ps.setString(2, productName);
 
-                stockList.add(s);
-            }
+            ps.executeUpdate();
+
+            ps.close();
+            db.getCon().close();
 
         } catch (SQLException ex) {
             Logger.getLogger(StockDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return stockList;
 
     }
+    
+    
+   
 
 }

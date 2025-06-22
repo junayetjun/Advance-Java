@@ -74,11 +74,11 @@ public class ProductDao {
         DefaultTableModel tableModel = new DefaultTableModel(columnsName, 0);
         jt.setModel(tableModel);
 
-        String sql = "select * from product ";
+        String sql = "select * from product";
 
         PreparedStatement ps;
         try {
-            ps = db.getCon().prepareCall(sql);
+            ps = db.getCon().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
